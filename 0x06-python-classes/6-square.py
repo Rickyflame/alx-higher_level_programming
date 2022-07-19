@@ -1,20 +1,21 @@
 #!/usr/bin/python3
-"""define a class square"""
+"""Define a class Square."""
 
 
 class Square:
-    """represent a square"""
+    """Represent a square."""
     def __init__(self, size=0, position=(0, 0)):
-        """initialize a new square
-        args: size (int): size of new square
-        position (int, int): position of new square
+        """Initialize a new square.
+        Args:
+            size (int): The size of the new square.
+            position (int, int): The position of the new square.
         """
         self.size = size
         self.position = position
 
     @property
     def size(self):
-        """get current size of square"""
+        """Get/set the current size of the square."""
         return (self.__size)
 
     @size.setter
@@ -27,7 +28,7 @@ class Square:
 
     @property
     def position(self):
-        """set current position of the square"""
+        """Get/set the current position of the square."""
         return (self.__position)
 
     @position.setter
@@ -36,15 +37,15 @@ class Square:
                 len(value) != 2 or
                 not all(isinstance(num, int) for num in value) or
                 not all(num >= 0 for num in value)):
-            raise TypeError("position must be a tuple of 2 positive integes")
+            raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
 
     def area(self):
-        """return current area of square"""
+        """Return the current area of the square."""
         return (self.__size * self.__size)
 
     def my_print(self):
-        """prints square with character #"""
+        """Print the square with the # character."""
         if self.__size == 0:
             print("")
             return
