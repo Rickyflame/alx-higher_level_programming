@@ -1,117 +1,97 @@
-#2-matrix_divided.txt
+================================
+ How to Use 2-matrix_divided.py
+================================
 
-==============================
-How to Use 2-matrix_divided.py
-==============================
+This module contains only a single function
 
-This module defines a matrix division function ``matrix_divided(matrix, div)``.
+``2-matrix_divided.py(matrix, div)``
 
-Usage
-=====
+Which divides all elements of a matrix and returns a new matrix
 
-``matrix_divided(...)`` returns a new matrix that is a copy of the parameter
-``matrix`` with all elements divided by ``div``.
+Numbers
+=======
 
-::
+``2-matrix_divided.py`` returns a new resulting matrix based on division
+with it's second argument
 
-    >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
-    >>> matrix = [
-    ...     [3, 6, 9],
-    ...     [12, 15, 18]
-    ... ]
-    >>> print(matrix_divided(matrix, 3))
-    [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
 
-Note that quotients are rounded to a maximum of two decimal places.
+Matrix with equal sized rows with integers
 
-::
+>>> matrix = [[1, 2, 3], [4, 5, 6]]
+>>> print(matrix_divided(matrix, 3))
+[[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
 
-    >>> matrix = [
-    ...     [1, 2, 3],
-    ...     [4, 5, 6]
-    ... ]
-    >>> print(matrix_divided(matrix, 3))
-    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+>>> print(matrix)
+[[1, 2, 3], [4, 5, 6]]
 
-The original matrix is left unchanged.
+Matrix with equal sized rows with floats
 
-::
+>>> matrix = [[1, 2, 3.6], [4.7, 6.23, 6]]
+>>> print(matrix_divided(matrix, 3))
+[[0.33, 0.67, 1.2], [1.57, 2.08, 2.0]]
 
-    >>> print(matrix)
-    [[1, 2, 3], [4, 5, 6]]
+Case div is a float
 
-The function can also handle floating-point numbers.
-
-::
-
-    >>> matrix = [
-    ...     [1.1, -2.2, 3.3],
-    ...     [4.4, 5.5, -6.6]
-    ... ]
-    >>> print(matrix_divided(matrix, 3))
-    [[0.37, -0.73, 1.1], [1.47, 1.83, -2.2]]
-
-Integers and floats can be combined.
-
-::
-
-    >>> matrix = [
-    ...     [1, -2.2, 3, 4.4, 5],
-    ...     [-6.6, 7.00, 8, 9.999, 10]
-    ... ]
-    >>> print(matrix_divided(matrix, 3))
-    [[0.33, -0.73, 1.0, 1.47, 1.67], [-2.2, 2.33, 2.67, 3.33, 3.33]]
-
-But an empty list of lists will succeed.
-
-::
-
-    >>> matrix = [[]]
-    >>> print(matrix_divided(matrix, 3))
-    [[]]
+>>> print(matrix_divided(matrix, 3.2))
+[[0.31, 0.62, 1.12], [1.47, 1.95, 1.88]]
 
 
-Finally, all the rows in ``matrix`` must be the same size. If any rows are
-of different sizes, a new TypeError is raised.
+Exceptions
+=========
 
-::
+while ``2-matrix_divided.py`` performs divisions to matrix it also limits
+what user passes to it
 
-    >>> matrix = [
-    ...     [1, 2, 3, 4],
-    ...     [5, 6, 7]
-    ... ]
-    >>> print(matrix_divided(matrix, 3))
-    Traceback (most recent call last):
-    TypeError: Each row of the matrix must have the same size
+Example passing a dictionary instead of matrix list
 
-Invalid Divisors
-================
+>>> matrix = ([1, 2, 3], [4, 5, 6])
+>>> print(matrix_divided(matrix, 3))
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-The parameter ``div`` must be either an int or float. Otherwise, a TypeError
-is raised.
+Example passing a matrix with other data types instead of a list
 
-::
+>>> matrix = [(1, 2, 3), [4, 5, 6]]
+>>> print(matrix_divided(matrix, 3))
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-    >>> matrix = [
-    ...     [1, 2, 3],
-    ...     [4, 5, 6]
-    ... ]
-    >>> print(matrix_divided(matrix, "not a number"))
-    Traceback (most recent call last):
-    TypeError: div must be a number
+Example matrix but with rows containing non float or int data types
 
-::
+>>> matrix = [[1, 2, "holberton"], [4, 5, 6]]
+>>> print(matrix_divided(matrix, 3))
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
 
+Example passing matrix with unequal row sizes
 
-    >>> print(matrix_divided(matrix, None))
-    Traceback (most recent call last):
-    TypeError: div must be a number
+>>> matrix = [[1, 2, 3], [4, 5]]
+>>> print(matrix_divided(matrix, 3))
+Traceback (most recent call last):
+TypeError: Each row of the matrix must have the same size
 
-``div`` must also be non-zero. Otherwise, a ZeroDivisionError is raised.
+Example when div argument passed isn't float or int
 
-::
+>>> matrix = [[1, 2, 3], [4, 5, 6]]
+>>> print(matrix_divided(matrix, "holberton"))
+Traceback (most recent call last):
+TypeError: div must be a number
 
-    >>> print(matrix_divided(matrix, 0))
-    Traceback (most recent call last):
-    ZeroDivisionError: division by zero
+Example when div is zero
 
+>>> print(matrix_divided(matrix, 0))
+Traceback (most recent call last):
+ZeroDivisionError: division by zero
+
+Case where either one arguments is missing
+
+>>> print(matrix_divided(0))
+Traceback (most recent call last):
+TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+Case where both arguments are missing
+
+>>> print(matrix_divided())
+Traceback (most recent call last):
+TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
