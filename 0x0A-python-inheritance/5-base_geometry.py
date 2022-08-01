@@ -1,7 +1,7 @@
-i#!/usr/bin/python3
+#!/usr/bin/python3
 """empty class BaseGeometry"""
 
 
 class BaseGeometry:
-    """empy class"""
+    """empty class"""
     pass
