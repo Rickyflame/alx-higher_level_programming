@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     cursor = db.cursor()
     cursor.execute("""SELECT * FROM states
-        WHERE CAST(name AS BINARY) = CAST('[]' AS BINARY)
+        WHERE CAST(name AS BINARY) = CAST('{}' AS BINARY)
         ORDER BY states.id;""".format(sys.argv[4]))
     records = cursor.fetchall()
     for record in records:
