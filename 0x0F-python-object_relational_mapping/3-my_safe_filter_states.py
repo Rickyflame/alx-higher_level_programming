@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-a script that thakes in an argument and display all values in the states table
+A script that thakes in an argument and display all values in the states table
 """
 import MySQLdb
 import sys
@@ -21,4 +21,4 @@ if __name__ == "__main__":
     records = cursor.fetchall()
     for record in records:
         print(record)
-    db.close
+    db.close()
